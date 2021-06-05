@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as userActions from "../../redux/actions/userActions";
 import {
   CardHeader,
   Card,
@@ -9,10 +10,33 @@ import {
   Col,
   CardText,
   Table,
+  Label,
+  Input,
+  FormGroup,
+  Button,
+  Form,
+  Alert
 } from "reactstrap";
 import { bindActionCreators } from "redux";
 
 class User extends Component {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.actions.updateUser(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.email,
+      this.state.password,
+      this.props.match.params.id
+    );
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -47,7 +71,59 @@ class User extends Component {
               <CardHeader>
                 <CardTitle tag={"h5"}>Bilgileri Güncelle</CardTitle>
               </CardHeader>
-              <CardBody></CardBody>
+              <CardBody>
+                <Form onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <Label for="firstName">Ad</Label>
+                    <Input
+                      className="mt-1"
+                      type="firstName"
+                      name="firstName"
+                      id="firstName"
+                      placeholder="Adınızı giriniz"
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="lastName">Soyad</Label>
+                    <Input
+                      className="mt-1"
+                      type="lastName"
+                      name="lastName"
+                      id="lastName"
+                      placeholder="Soyadınızı Giriniz"
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="email">E-posta</Label>
+                    <Input
+                      className="mt-1"
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="E-posta adresinizi giriniz"
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="password">Parola</Label>
+                    <Input
+                      className="mt-1"
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Parolanızı giriniz"
+                      onChange={this.handleChange}
+                    />
+                  </FormGroup>
+                  <div className="d-grid gap-2 mt-2">
+                    <Button type="submit" color="primary">
+                      Güncelle
+                    </Button>
+                  </div>
+                </Form>
+              </CardBody>
             </Card>
           </Col>
         </Row>
@@ -58,13 +134,16 @@ class User extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.getUserReducer,
+    user: state.userReducer,
+    userUpdateResponse: state.updateUserReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: {},
+    actions: {
+      updateUser: bindActionCreators(userActions.updateUser, dispatch),
+    },
   };
 }
 

@@ -13,4 +13,5 @@ export default {
   registerResponse: {},
   loginResponse: {},
   user: {},
+  updatedUser:{}
 };

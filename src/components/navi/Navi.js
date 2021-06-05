@@ -81,7 +81,7 @@ function mapStateToProps(state) {
   return {
     loginResponse: state.loginReducer,
     logoutResponse: state.logoutReducer,
-    user: state.getUserReducer,
+    user: state.userReducer,
   };
 }
 

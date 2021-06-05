@@ -28,6 +28,8 @@ export function register(firstName, lastName, email, password) {
       .post(url, { firstName, lastName, email, password })
       .then((response) => {
         dispatch(registerSuccess(response.data));
+      }, (err)=>{
+        alert("E-posta adresi zaten alınmış")
       });
   };
 }
@@ -40,6 +42,8 @@ export function login(email, password) {
       localStorage.setItem("email", email);
       dispatch(loginSuccess(response.data));
       window.location.replace("/");
+    }, (err)=>{
+      alert("E-posta adresi ya da parola hatalı")
     });
   };
 }

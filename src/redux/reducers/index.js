@@ -14,7 +14,7 @@ import firstImageByProductReducer from "./productReducers/firstImageByProductRed
 import registerReducer from "./authReducers/registerReducer";
 import loginReducer from "./authReducers/loginReducer";
 import logoutReducer from "./authReducers/logoutReducer";
-import getUserReducer from "./userReducers/getUserReducer";
+import userReducer from "./userReducers/userReducer";
 
 const rootReducer = combineReducers({
   changeCategoryReducer,
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   registerReducer,
   loginReducer,
   logoutReducer,
-  getUserReducer,
+  userReducer,
 });
 
 export default rootReducer;
