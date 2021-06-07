@@ -61,9 +61,9 @@ export function getTotalPriceSuccess(totalPriceResponse){
   }
 }
 
-export function getTotalPrice(){
+export function getTotalPrice(userId){
   return function(dispatch){
-    let url = "https://localhost:44312/api/Baskets/gettotalprice"
+    let url = "https://localhost:44312/api/Baskets/gettotalprice?userId=" + userId
     return axios.get(url).then((response)=>dispatch(getTotalPriceSuccess(response.data)))
   }
 }

@@ -10,7 +10,7 @@ class Basket extends Component {
 
   componentDidMount() {
     this.props.actions.getBasket(this.props.match.params.id);
-    this.props.actions.getTotalPrice();
+    this.props.actions.getTotalPrice(this.props.match.params.id);
   }
 
   add(userId, productId) {
