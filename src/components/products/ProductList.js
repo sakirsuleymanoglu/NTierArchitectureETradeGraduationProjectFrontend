@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActions from "../../redux/actions/productActions";
 import * as productImageActions from "../../redux/actions/productImageActions";
+import * as basketActions from "../../redux/actions/basketActions";
 
 import {
   Card,
@@ -13,7 +14,6 @@ import {
   CardText,
   Button,
   CardGroup,
-  Badge,
 } from "reactstrap";
 
 import { NavLink } from "react-router-dom";
@@ -21,6 +21,10 @@ import { NavLink } from "react-router-dom";
 class ProductList extends Component {
   componentDidMount() {
     this.props.actions.getProducts();
+  }
+
+  add(userId, productId) {
+    this.props.actions.addToBasket(userId, productId);
   }
 
   render() {
@@ -55,7 +59,12 @@ class ProductList extends Component {
                   Detaya Git
                 </NavLink>
                 {localStorage.getItem("jwtToken") ? (
-                  <Button color="primary" outline className="ms-2">
+                  <Button
+                    color="primary"
+                    outline
+                    className="ms-2"
+                    onClick={() => this.add(this.props.user.id, product.id)}
+                  >
                     Sepete Ekle
                   </Button>
                 ) : null}
@@ -73,6 +82,7 @@ function mapStateToProps(state) {
     currentCategory: state.changeCategoryReducer,
     products: state.productListReducer,
     image: state.firstImageByProductReducer,
+    user: state.userReducer,
   };
 }
 
@@ -84,6 +94,7 @@ function mapDispatchToProps(dispatch) {
         productImageActions.getFirstImageByProduct,
         dispatch
       ),
+      addToBasket: bindActionCreators(basketActions.add, dispatch),
     },
   };
 }

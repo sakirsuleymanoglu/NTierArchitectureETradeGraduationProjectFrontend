@@ -6,13 +6,18 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownToggle,
+  DropdownItem,
 } from "reactstrap";
 
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authActions from "../../redux/actions/authActions";
 import * as userActions from "../../redux/actions/userActions";
+import * as basketActions from "../../redux/actions/basketActions";
 
 const Navi = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,26 +38,37 @@ const Navi = (props) => {
   return (
     <div>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/" className="ms-2">
-          MARMARA MARKET
-        </NavbarBrand>
+        <NavbarBrand className="ms-4">MARMARA MARKET</NavbarBrand>
         <NavbarToggler className="me-2" onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           {localStorage.getItem("jwtToken") ? (
             <Nav className="mr-auto" navbar>
+              <NavItem>
+                <NavLink to={"/"} className="nav-link ms-4">
+                  Anasayfa
+                </NavLink>
+              </NavItem>
               {props.user.firstName !== undefined &&
               props.user.lastName !== undefined ? (
                 <NavItem>
                   <NavLink
                     to={"/user/" + props.user.id + "/profile"}
-                    className="nav-link ms-2"
+                    className="nav-link ms-4"
                   >
                     {props.user.firstName + " " + props.user.lastName}
                   </NavLink>
                 </NavItem>
               ) : null}
               <NavItem>
-                <NavLink onClick={logout} to={"/"} className="nav-link ms-2">
+                <NavLink
+                  to={`/user/${props.user.id}/basket`}
+                  className="nav-link ms-4"
+                >
+                  Sepetim
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={logout} to={"/"} className="nav-link ms-4">
                   Çıkış Yap
                 </NavLink>
               </NavItem>
@@ -60,12 +76,17 @@ const Navi = (props) => {
           ) : (
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink to={"/login"} className="nav-link ms-2">
+                <NavLink to={"/"} className="nav-link ms-4">
+                  Anasayfa
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to={"/login"} className="nav-link ms-4">
                   Giriş Yap
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to={"/register"} className="nav-link ms-2">
+                <NavLink to={"/register"} className="nav-link ms-4">
                   Kayıt Ol
                 </NavLink>
               </NavItem>

@@ -1,10 +1,9 @@
-import { Alert, Card, CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card, CardBody, CardHeader, CardTitle, Col, Row } from "reactstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as authActions from "../../redux/actions/authActions";
-import { NavLink } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -35,10 +34,12 @@ class Login extends Component {
           <Col md="3"></Col>
           <Col md="6">
             <Card className="mt-4">
-              <CardBody>
-                <CardTitle tag="h5" className="text-primary">
+              <CardHeader>
+                <CardTitle tag="h5">
                   Giriş Yap
                 </CardTitle>
+              </CardHeader>
+              <CardBody>
                 <Form onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <Label for="email">Email</Label>

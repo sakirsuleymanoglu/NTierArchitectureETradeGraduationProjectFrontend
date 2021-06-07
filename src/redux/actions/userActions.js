@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
+import alertify from 'alertifyjs';
 
 export function getUserSuccess(user) {
   return {
@@ -34,7 +35,7 @@ export function updateUser(firstName, lastName, email, password, userId) {
         localStorage.setItem("email", email);
         window.location.reload();
       },(err)=>{
-        alert("E-posta adresi zaten alınmış")
+          alertify.error("E-posta adresi zaten alınmış");
       });
   };
 }

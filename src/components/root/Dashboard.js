@@ -10,8 +10,7 @@ import { bindActionCreators } from "redux";
 import * as productActions from "../../redux/actions/productActions";
 
 class Dashboard extends Component {
-
-  componentDidMount(){
+  componentDidMount() {
     this.props.actions.getProducts();
   }
 
@@ -43,6 +42,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     products: state.productListReducer,
+    user: state.userReducer,
   };
 }
 

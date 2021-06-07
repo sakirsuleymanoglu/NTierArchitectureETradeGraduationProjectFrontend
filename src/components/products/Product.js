@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActions from "../../redux/actions/productActions";
 import * as productImageActions from "../../redux/actions/productImageActions";
+import * as basketActions from "../../redux/actions/basketActions"
 
 import {
   Container,
@@ -15,8 +16,6 @@ import {
   Row,
   Col,
   Table,
-  CardText,
-  Alert,
   CardHeader,
 } from "reactstrap";
 
@@ -33,9 +32,12 @@ class Product extends Component {
     this.props.actions.getImageById(image.id);
   }
 
+
+  add(userId, productId){
+    this.props.actions.addToBasket(userId, productId)
+  }
+
   render() {
-    console.log(this.props.image);
-    let url = "localhost";
     return (
       <Container>
         <Row>
@@ -121,7 +123,7 @@ class Product extends Component {
             </CardGroup>
             {localStorage.getItem("jwtToken") ? (
               <div className="d-grid gap-2 mt-4">
-                <Button outline color="primary">
+                <Button outline color="primary" onClick={()=>this.add(this.props.user.id, this.props.product.id)}>
                   Sepete Ekle
                 </Button>
               </div>
@@ -141,6 +143,7 @@ function mapStateToProps(state) {
     currentImage: state.changeImageReducer,
     image: state.imageByIdReducer,
     firstImage: state.firstImageByProductReducer,
+    user:state.userReducer
   };
 }
 
@@ -168,6 +171,7 @@ function mapDispatchToProps(dispatch) {
         productImageActions.getFirstImageByProduct,
         dispatch
       ),
+      addToBasket: bindActionCreators(basketActions.add, dispatch),
     },
   };
 }

@@ -8,18 +8,22 @@ import {
   CardTitle,
   Row,
   Col,
-  CardText,
   Table,
   Label,
   Input,
   FormGroup,
   Button,
   Form,
-  Alert
 } from "reactstrap";
 import { bindActionCreators } from "redux";
+import * as basketActions from "../../redux/actions/basketActions"
 
 class User extends Component {
+
+  componentDidMount(){
+    this.props.actions.getBasket(this.props.user.id);
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.actions.updateUser(
@@ -143,6 +147,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       updateUser: bindActionCreators(userActions.updateUser, dispatch),
+      getBasket: bindActionCreators(basketActions.getBasket, dispatch)
     },
   };
 }

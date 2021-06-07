@@ -13,5 +13,8 @@ export default {
   registerResponse: {},
   loginResponse: {},
   user: {},
-  updatedUser:{}
+  updatedUser:{},
+  basket:{},
+  basketResponse:{},
+  totalPriceResponse:{}
 };

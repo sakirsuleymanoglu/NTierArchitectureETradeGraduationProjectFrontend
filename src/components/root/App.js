@@ -7,6 +7,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "../login/Login";
 import Register from "../register/Register";
 import User from "../user/User";
+import Basket from "../basket/Basket";
+
 
 function App(props) {
   return (
@@ -17,6 +19,7 @@ function App(props) {
           <Route path="/" exact component={Dashboard} />
           <Route path="/products/:id" component={Product}></Route>
           <Route path="/user/:id/profile" component={User}></Route>
+          <Route path="/user/:id/basket" component={Basket}></Route>
 
           {!localStorage.getItem("jwtToken") ? (
             <Route path="/register" component={Register}></Route>
@@ -37,3 +40,4 @@ function App(props) {
 }
 
 export default App;
+  

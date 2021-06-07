@@ -15,6 +15,9 @@ import registerReducer from "./authReducers/registerReducer";
 import loginReducer from "./authReducers/loginReducer";
 import logoutReducer from "./authReducers/logoutReducer";
 import userReducer from "./userReducers/userReducer";
+import getBasketReducer from "./basketReducers/getBasketReducer"
+import addOrDeleteReducer from "./basketReducers/addOrDeleteReducer"
+import getTotalPriceReducer from "./basketReducers/getTotalPriceReducer"
 
 const rootReducer = combineReducers({
   changeCategoryReducer,
@@ -33,6 +36,9 @@ const rootReducer = combineReducers({
   loginReducer,
   logoutReducer,
   userReducer,
+  getBasketReducer,
+  addOrDeleteReducer,
+  getTotalPriceReducer
 });
 
 export default rootReducer;

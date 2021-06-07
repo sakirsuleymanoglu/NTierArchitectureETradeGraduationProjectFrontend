@@ -1,4 +1,12 @@
-import { Alert, Card, CardBody, CardTitle, Col, Row } from "reactstrap";
+import {
+  Alert,
+  Card,
+  CardBody,
+  CardTitle,
+  Col,
+  Row,
+  CardHeader,
+} from "reactstrap";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
@@ -53,10 +61,10 @@ class Register extends Component {
               </Alert>
             ) : (
               <Card className="mt-4">
+                <CardHeader>
+                  <CardTitle tag="h5">Kayıt Ol</CardTitle>
+                </CardHeader>
                 <CardBody>
-                  <CardTitle tag="h5" className="text-primary">
-                    Kayıt Ol
-                  </CardTitle>
                   <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                       <Label for="firstName">Ad</Label>

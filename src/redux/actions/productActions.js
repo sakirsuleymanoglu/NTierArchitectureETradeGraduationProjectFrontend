@@ -59,3 +59,4 @@ export function getProducts(params = parameters) {
       .then((result) => dispatch(getProductsSuccess(result.data)));
   };
 }
+

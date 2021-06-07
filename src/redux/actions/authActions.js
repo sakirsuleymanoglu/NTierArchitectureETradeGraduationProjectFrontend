@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
+import * as alertify from "alertifyjs";
 
 export function registerSuccess(response) {
   return {
@@ -24,27 +25,32 @@ export function logoutSuccess() {
 export function register(firstName, lastName, email, password) {
   return function (dispatch) {
     let url = "https://localhost:44312/api/Auths/register";
-    return axios
-      .post(url, { firstName, lastName, email, password })
-      .then((response) => {
+    return axios.post(url, { firstName, lastName, email, password }).then(
+      (response) => {
         dispatch(registerSuccess(response.data));
-      }, (err)=>{
-        alert("E-posta adresi zaten alınmış")
-      });
+      },
+      (err) => {
+        alertify.error("E-posta adresi zaten alınmış");
+      }
+    );
   };
 }
 
 export function login(email, password) {
   return function (dispatch) {
     let url = "https://localhost:44312/api/Auths/login";
-    return axios.post(url, { email, password }).then((response) => {
-      localStorage.setItem("jwtToken", response.data.data.token);
-      localStorage.setItem("email", email);
-      dispatch(loginSuccess(response.data));
-      window.location.replace("/");
-    }, (err)=>{
-      alert("E-posta adresi ya da parola hatalı")
-    });
+    return axios.post(url, { email, password }).then(
+      (response) => {
+        localStorage.setItem("jwtToken", response.data.data.token);
+        localStorage.setItem("email", email);
+        dispatch(loginSuccess(response.data));
+        alertify.success("Giriş başarılı");
+        window.location.replace("/");
+      },
+      (err) => {
+        alertify.error("E-posta adresi yada parola hatalı");
+      }
+    );
   };
 }
 
